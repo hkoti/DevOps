@@ -1,0 +1,9 @@
+---
+- name: Install Java
+  apt:
+    name: openjdk-11-jdk
+    state: present
+
+- name: Post-installation message for Java
+  debug:
+    msg: "Java is installed!"
