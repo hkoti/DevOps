@@ -1,0 +1,7 @@
+---
+- include_tasks: install.yml
+- include_tasks: configure.yml
+- include_tasks: service.yml
+- name: Post-installation message for Nginx
+  debug:
+    msg: "Nginx server is instaalled and configured successfully"
