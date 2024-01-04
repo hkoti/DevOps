@@ -1,0 +1,7 @@
+---
+- include_tasks: install.yml
+- include_tasks: configure.yml
+- include_tasks: service.yml
+- name: Post-installation message for Apache2
+  debug:
+    msg: "Apache2 server is installed and configured successfully"
