@@ -1,0 +1,77 @@
+K8s ( Kubeadm )installation on ubuntu 20.04 Aws Instance 
+
+Prerequisite 
+
+Create minimum 2 AWS t2.medium instance of ubuntu 20.04 
+Add all traffic in Security Group 
+
+Commands to Run on Master & Slave Machine 
+
+Install Docker on all Machines 
+
+sudo apt update 
+sudo apt update install docker.io -y 
+
+Verify Docker is Install in all machine 
+
+docker --version
+
+Create a script file in all machine
+
+sudo nano install.sh 
+
+Paste the below commands in install.sh
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y curl apt-transport-https ca-certificates software-properties-common
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo add-apt-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo swapoff -a
+sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
+
+Save and exit the file 
+
+Ctrl + s & Ctrl + x 
+
+Run the install.sh file in all machine
+
+bash install.sh
+
+Verify if Kubeadm , Kubectl , Kubelet installed 
+
+which Kubeadm && which Kubectl && which Kubelet 
+
+In Master Machine 
+
+sudo su 
+Kubeadm init 
+
+In Slave Machines Paste the Token being a root user 
+
+In master machine paste below command being a normal user 
+
+----run below commands as a normal user-------------------------
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+----------------------------------------------------------
+kubectl get nodes -w
+
+That's all you have configured the K8s Cluster if you face
+any issue take screenshot of the error and mail it to support@intellipaat.com
+
+------------------------------------------------------------
+
+kubelet - managing and maintaing state of cluster
+kubeadm - initiliaze the cluster
+kubectl - interatcing with the cluster
+
+---how to set instance name---
+sudo su
+hostnamectl set-hostname master
+exec bash
+-------------------------------
