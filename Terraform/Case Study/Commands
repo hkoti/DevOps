@@ -1,5 +1,3 @@
-apt install updaye
-apt install update
 apt update
 apt install awscli
 aws configure
