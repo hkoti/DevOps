@@ -1,0 +1,19 @@
+**Commands:**
+
+sudo apt update
+bash minikube.sh
+kubectl get nodes
+sudo su
+kubectl create deployment apache --image=fedora/apache --port=80 --replicas=2
+kubectl get deploy
+kubectl create deployment site --image=hkoti300/site --port=80 --replicas=2
+kubectl get deploy
+vi apache-service.yml
+kubectl apply -f apache-service.yml
+vi custom-service.yml
+kubectl apply -f custom-service.yml
+kubectl get svc
+vi ingress.yml
+kubectl apply -f ingress.yml
+kubectl port-forward service/ingress-nginx-controller -n ingress-nginx --address 0.0.0.0 :80
+history
