@@ -7,10 +7,3 @@
         name: nginx
         state: present
 
-- hosts:
-  - slave2
-  tasks:
-    - name: Install Apache2
-      package:
-        name: httpd
-        state: present
